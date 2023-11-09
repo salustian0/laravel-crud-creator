@@ -1,0 +1,15 @@
+<?php
+
+namespace App\Interfaces\Services;
+
+use App\Models\{{UC_FIRST_ENTITY_NAME}};
+use Illuminate\Pagination\LengthAwarePaginator;
+
+interface I{{UC_FIRST_ENTITY_NAME}}Service
+{
+    public function getAll() : LengthAwarePaginator;
+    public function getById(int $id) : {{UC_FIRST_ENTITY_NAME}};
+    public function create(array $data) : {{UC_FIRST_ENTITY_NAME}};
+    public function update(array $data, int $id) : {{UC_FIRST_ENTITY_NAME}};
+    public function delete(int $id): bool;
+}

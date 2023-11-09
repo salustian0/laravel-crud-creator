@@ -1,0 +1,16 @@
+<?php
+
+namespace App\Interfaces\Repositories;
+
+use App\Models\{{UC_FIRST_ENTITY_NAME}};
+use Illuminate\Pagination\LengthAwarePaginator;
+
+interface I{{UC_FIRST_ENTITY_NAME}}Repository
+{
+    public function getAll() : LengthAwarePaginator;
+    public function getById(int $id) : {{UC_FIRST_ENTITY_NAME}};
+
+    public function create(array $data) : {{UC_FIRST_ENTITY_NAME}};
+    public function update({{UC_FIRST_ENTITY_NAME}} ${{LC_FIRST_ENTITY_NAME}}) : {{UC_FIRST_ENTITY_NAME}};
+    public function delete({{UC_FIRST_ENTITY_NAME}} ${{LC_FIRST_ENTITY_NAME}}): bool;
+}

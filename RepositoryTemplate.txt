@@ -1,0 +1,42 @@
+<?php
+
+namespace App\Repositories;
+
+
+namespace App\Repositories;
+
+use App\Consts\AppConsts;
+use App\Interfaces\Repositories\I{{UC_FIRST_ENTITY_NAME}}Repository;
+use App\Models\Role;
+use App\Models\{{UC_FIRST_ENTITY_NAME}};
+use Illuminate\Pagination\LengthAwarePaginator;
+
+class {{UC_FIRST_ENTITY_NAME}}Repository implements I{{UC_FIRST_ENTITY_NAME}}Repository
+{
+
+    public function getAll(): LengthAwarePaginator
+    {
+        return {{UC_FIRST_ENTITY_NAME}}::paginate(AppConsts::PAGINATION_PER_PAGE);
+    }
+
+    public function getById(int $id): {{UC_FIRST_ENTITY_NAME}}
+    {
+        return {{UC_FIRST_ENTITY_NAME}}::findOrFail($id);
+    }
+
+    public function create(array $data): {{UC_FIRST_ENTITY_NAME}}
+    {
+       return {{UC_FIRST_ENTITY_NAME}}::create($data);
+    }
+
+    public function update({{UC_FIRST_ENTITY_NAME}} ${{LC_FIRST_ENTITY_NAME}}): {{UC_FIRST_ENTITY_NAME}}
+    {
+        ${{LC_FIRST_ENTITY_NAME}}->update();
+        return ${{LC_FIRST_ENTITY_NAME}};
+    }
+
+    public function delete({{UC_FIRST_ENTITY_NAME}} ${{LC_FIRST_ENTITY_NAME}}): bool
+    {
+        return ${{LC_FIRST_ENTITY_NAME}}->delete();
+    }
+}

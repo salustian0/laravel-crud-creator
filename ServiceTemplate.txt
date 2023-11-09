@@ -1,0 +1,74 @@
+<?php
+
+namespace App\Services;
+
+use App\Exceptions\ValidationServiceException;
+use App\Interfaces\Repositories\I{{UC_FIRST_ENTITY_NAME}}Repository;
+use App\Interfaces\Services\I{{UC_FIRST_ENTITY_NAME}}Service;
+use App\Models\{{UC_FIRST_ENTITY_NAME}};
+use App\Validation\{{UC_FIRST_ENTITY_NAME}}Validator;
+use Illuminate\Pagination\LengthAwarePaginator;
+
+class {{UC_FIRST_ENTITY_NAME}}Service implements  I{{UC_FIRST_ENTITY_NAME}}Service
+{
+
+    public function __construct(
+        private readonly I{{UC_FIRST_ENTITY_NAME}}Repository ${{LC_FIRST_ENTITY_NAME}}Repository,
+        private readonly  {{UC_FIRST_ENTITY_NAME}}Validator ${{LC_FIRST_ENTITY_NAME}}Validator
+    )
+    {}
+
+    public function getAll(): LengthAwarePaginator
+    {
+        return  $this->{{LC_FIRST_ENTITY_NAME}}Repository->getAll();
+    }
+
+    public function getById(int $id): {{UC_FIRST_ENTITY_NAME}}
+    {
+       return $this->{{LC_FIRST_ENTITY_NAME}}Repository->getById($id);
+    }
+
+    public function create(array $data): {{UC_FIRST_ENTITY_NAME}}
+    {
+        $validator = $this->{{LC_FIRST_ENTITY_NAME}}Validator->validate($data);
+
+        if($validator->fails()){
+            throw new ValidationServiceException($validator);
+        }
+
+        ${{LC_FIRST_ENTITY_NAME}} =  $this->{{LC_FIRST_ENTITY_NAME}}Repository->create($data);
+
+        return ${{LC_FIRST_ENTITY_NAME}};
+    }
+
+    public function update(array $data, int $id): {{UC_FIRST_ENTITY_NAME}}
+    {
+        $validator = $this->{{LC_FIRST_ENTITY_NAME}}Validator->validate($data, true);
+
+        if($validator->fails()){
+            throw new ValidationServiceException($validator);
+        }
+
+        ${{LC_FIRST_ENTITY_NAME}} = $this->{{LC_FIRST_ENTITY_NAME}}Repository->getById($id);
+
+        if(!${{LC_FIRST_ENTITY_NAME}}){
+            throw new \Exception('not exists');
+        }
+
+        ${{LC_FIRST_ENTITY_NAME}}->fill($data);
+
+        return $this->{{LC_FIRST_ENTITY_NAME}}Repository->update(${{LC_FIRST_ENTITY_NAME}});
+    }
+
+    public function delete(int $id): bool
+    {
+        ${{LC_FIRST_ENTITY_NAME}} = $this->{{LC_FIRST_ENTITY_NAME}}Repository->getById($id);
+
+        if(!${{LC_FIRST_ENTITY_NAME}}){
+            throw new \Exception('not exists');
+        }
+
+        return $this->{{LC_FIRST_ENTITY_NAME}}Repository->delete(${{LC_FIRST_ENTITY_NAME}});
+    }
+
+}

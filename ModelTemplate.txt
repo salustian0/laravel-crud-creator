@@ -1,0 +1,15 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class {{UC_FIRST_ENTITY_NAME}} extends Model
+{
+    use HasFactory;
+
+    protected $table = '{{TABLE_NAME}}';
+
+    protected $fillable = [/*to change*/];
+}

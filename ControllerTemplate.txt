@@ -1,0 +1,59 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Interfaces\IApiController;
+use App\Interfaces\Services\I{{UC_FIRST_ENTITY_NAME}}Service;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+
+class {{UC_FIRST_ENTITY_NAME}}Controller extends Controller implements IApiController
+{
+
+    public function __construct(
+        private readonly I{{UC_FIRST_ENTITY_NAME}}Service ${{LC_FIRST_ENTITY_NAME}}Service
+    )
+    {}
+
+    public function getById(int $id): Response
+    {
+        $result = $this->{{LC_FIRST_ENTITY_NAME}}Service->getById($id);
+        return response()->api($result);
+    }
+
+    public function getAll(): JsonResponse
+    {
+        try {
+            $result = $this->{{LC_FIRST_ENTITY_NAME}}Service->getAll();
+            return response()->json($result);
+        }catch (\Exception $exception){
+            return response()->json($exception->getMessage());
+        }
+    }
+
+
+    public function create(Request $request): JsonResponse
+    {
+        $data = $request->only(['name', 'email', 'password', 'roles']);
+        $result = $this->{{LC_FIRST_ENTITY_NAME}}Service->create($data);
+        return response()->json($result);
+    }
+
+    public function update(Request $request, int $id): JsonResponse
+    {
+        $data = $request->only(['name', 'email', 'password', 'roles']);
+        $result = $this->{{LC_FIRST_ENTITY_NAME}}Service->update($data, $id);
+        return response()->json($result);
+    }
+
+    public function delete(int $id): JsonResponse
+    {
+        try {
+            $result = $this->{{LC_FIRST_ENTITY_NAME}}Service->delete($id);
+            return response()->json($result);
+        }catch (\Exception $exception){
+            return response()->json($exception->getMessage());
+        }
+    }
+}
