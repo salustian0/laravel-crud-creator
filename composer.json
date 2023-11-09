@@ -1,0 +1,22 @@
+{
+  "name": "salustian0/larvel-crud-creator",
+  "description": "Gerador de cruds básicos láravel",
+  "type": "library",
+  "keywords": ["php", "library", "bibliotéca"],
+  "homepage": "https://github.com/salustian0/laravel-crud-creator",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Renan Salustiano Silva",
+      "email": "renansalustiano2020@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.0.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Salustian0\\LaravelCrudCreator\\": "src/"
+    }
+  }
+}
